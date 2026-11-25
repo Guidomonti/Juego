@@ -12,11 +12,15 @@ import java.awt.Color;
 
 public class Main {
     public static void main(String[] args) {
-        // 1. Crear ubicaciones (nodos del grafo)
+        // 1. Crear ubicaciones (nodos del grafo) y carga de fondos
         Ubicacion cafeteria = new Ubicacion("Cafetería", new Color(92, 58, 33));
+        cafeteria.cargarFondos("CalleDia.jpeg");
         Ubicacion patio = new Ubicacion("Patio", new Color(46, 107, 79));
+        patio.cargarFondos("CasaAtardecer.jpeg");
         Ubicacion biblioteca = new Ubicacion("Biblioteca", new Color(45, 68, 102));
+        biblioteca.cargarFondos("ArteDia.jpeg");
         Ubicacion aula = new Ubicacion("Aula", new Color(110, 82, 42));
+        aula.cargarFondos("ClaseDia.jpeg");
 
         // 2. Conectar ubicaciones (aristas no dirigidas)
         GrafoMapa mapa = new GrafoMapa();

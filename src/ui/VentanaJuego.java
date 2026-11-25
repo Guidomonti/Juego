@@ -94,22 +94,27 @@ public class VentanaJuego extends JFrame {
         panelBotones.repaint();
     }
 
-    // Panel donde luego vas a dibujar tus imágenes reales con g.drawImage(...)
+    // Panel donde colocar imagenes
     private class PanelEscena extends JPanel {
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
             Ubicacion actual = motor.getUbicacionActual();
+            java.awt.image.BufferedImage fondo = actual.getFondoSegunTurnos(motor.getTurnosRestantes());
 
-            // Fondo placeholder (reemplazable por ImageIcon / BufferedImage)
-            g.setColor(actual.getColorPlaceholder());
-            g.fillRect(0, 0, getWidth(), getHeight());
-            g.setColor(Color.WHITE);
-            g.drawString("[FONDO: " + actual.getNombre() + "]", 20, 30);
+            if (fondo != null) {
+                g.drawImage(fondo, 0, 0, getWidth(), getHeight(), this);
+            } else {
+                // Si todavía no tiene archivo asignado, dibuja el color de prueba
+                g.setColor(actual.getColorPlaceholder());
+                g.fillRect(0, 0, getWidth(), getHeight());
+                g.setColor(Color.WHITE);
+                g.drawString("[FONDO: " + actual.getNombre() + "]", 20, 30);
+            }
 
-            // Sprite personaje placeholder
+            // Sprite personaje (placeholder hasta que agreguemos sus PNG)
             if (motor.getPersonajeActivo() != null) {
-                g.setColor(new Color(40, 40, 60));
+                g.setColor(new Color(40, 40, 60, 220));
                 g.fillRoundRect(getWidth() / 2 - 75, 60, 150, 240, 20, 20);
                 g.setColor(Color.WHITE);
                 g.drawString(motor.getPersonajeActivo().getNombre(), getWidth() / 2 - 40, 180);
